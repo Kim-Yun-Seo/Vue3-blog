@@ -2,8 +2,10 @@
 import { ref } from 'vue'
 import { db } from 'boot/firebase'
 import { doc, setDoc } from 'firebase/firestore'
+import { useQuasar } from 'quasar'
 // collection, addDoc
 
+const $q = useQuasar()
 const title = ref('')
 const content = ref('')
 const existRule = (val:string) => (val && val.length > 0) || '무언가를 쓰세요'
@@ -13,15 +15,17 @@ const onSubmit = async () => {
   //   title: title.value,
   //   content: content.value
   // })
-  try {
-    await setDoc(doc(db, 'posts', title.value), {
-      title: title.value,
-      content: content.value
-      // title 자체를 id로 만들기 때문에 데이터에 접근하기가 상당히 쉬워짐
-    })
-  } catch (e) {
-    console.error(e)
-  }
+
+  await setDoc(doc(db, 'posts', title.value), {
+    title: title.value,
+    content: content.value
+    // title 자체를 id로 만들기 때문에 데이터에 접근하기가 상당히 쉬워짐
+  })
+  $q.notify({
+    message: 'Jim pinged you.',
+    color: 'purple',
+    avatar: 'https://cdn.quasar.dev/img/boy-avatar.png'
+  })
 }
 
 const onReset = () => {

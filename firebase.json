@@ -55,7 +55,7 @@
       "port": 5002
     },
     "pubsub": {
-      "port": 8096
+      "port": 8097
     },
     "storage": {
       "port": 9199
