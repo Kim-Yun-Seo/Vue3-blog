@@ -13,6 +13,6 @@ auth.useDeviceLanguage()
 connectAuthEmulator(auth, 'http://127.0.0.1:9099')
 
 const db = getFirestore()
-connectFirestoreEmulator(db, '127.0.0.1', 8094)
+connectFirestoreEmulator(db, '127.0.0.1', 8099)
 
 export { auth, db }
