@@ -46,7 +46,7 @@
       "port": 5001
     },
     "firestore": {
-      "port": 8099
+      "port": 8101
     },
     "database": {
       "port": 9010
@@ -55,7 +55,7 @@
       "port": 5002
     },
     "pubsub": {
-      "port": 8150
+      "port": 8154
     },
     "storage": {
       "port": 9199

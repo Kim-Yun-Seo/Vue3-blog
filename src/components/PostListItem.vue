@@ -1,12 +1,11 @@
 <script setup lang="ts">
+// 얘는 자식
 import { computed } from 'vue'
 import { QueryDocumentSnapshot, DocumentData } from 'firebase/firestore'
-// defineProps, collection, query, getDocs
 
 const props = defineProps<{
   item:QueryDocumentSnapshot<DocumentData>
 }>()
-
 const post = computed(() => props.item.data())
 
 </script>
