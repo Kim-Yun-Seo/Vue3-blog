@@ -40,3 +40,5 @@ yarn-error.log*
 firebaseConfig.js
 *.log
 .firebaserc
+/firebase-data2
+/firebase-export-1689669343974SrCl5J

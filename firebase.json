@@ -40,28 +40,30 @@
   },
   "emulators": {
     "auth": {
-      "port": 9099
+      "port": 9101
+      // 바꾸면 firebase.ts 가서  주소 수정
     },
     "functions": {
-      "port": 5001
+      "port": 5006
     },
     "firestore": {
-      "port": 8101
+      "port": 8115
+      // 바꾸면 index.ts 가서 주소 수정
     },
     "database": {
-      "port": 9010
+      "port": 9016
     },
     "hosting": {
-      "port": 5002
+      "port": 5005
     },
     "pubsub": {
-      "port": 8154
+      "port": 8165
     },
     "storage": {
-      "port": 9199
+      "port": 9201
     },
     "eventarc": {
-      "port": 9299
+      "port": 9301
     },
     "ui": {
       "enabled": true

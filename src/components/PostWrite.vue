@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { db } from 'boot/firebase'
-import { doc, setDoc } from 'firebase/firestore'
+// import { doc, setDoc } from 'firebase/firestore'
 import { useQuasar } from 'quasar'
 import { useRouter } from 'vue-router'
+
+import { Post, setPost } from 'src/models/Post'
 // collection, addDoc
 
 const $q = useQuasar()
@@ -14,11 +16,14 @@ const existRule = (val:string) => (val && val.length > 0) || '무언가를 쓰�
 const router = useRouter()
 
 const onSubmit = async () => {
-  await setDoc(doc(db, 'posts', title.value), {
-    title: title.value,
-    content: content.value
-    // title 자체를 id로 만들기 때문에 데이터에 접근하기가 상당히 쉬워짐
-  })
+  // await setDoc(doc(db, 'posts', title.value), {
+  //   title: title.value,
+  //   content: content.value,
+  //   // title 자체를 id로 만들기 때문에 데이터에 접근하기가 상당히 쉬워짐
+  //   createdAt: new Date(),
+  //   updatedAt: new Date()
+  // })
+  await setPost(new Post(title.value, content.value))
   $q.notify({
     message: '보내기에 성공하였습니다.',
     color: 'purple',
