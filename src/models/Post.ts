@@ -1,4 +1,11 @@
-import { FirestoreDataConverter, doc, setDoc, Timestamp, collection, query, getDocs } from 'firebase/firestore'
+import {
+  FirestoreDataConverter, doc, setDoc,
+  Timestamp, collection, query, getDocs,
+  // updateDoc,
+  deleteDoc,
+  serverTimestamp,
+  SetOptions
+} from 'firebase/firestore'
 import { QEditor } from 'quasar'
 import { db } from 'src/boot/firebase'
 
@@ -14,7 +21,12 @@ export class Post {
 }
 
 const converter:FirestoreDataConverter<Post> = {
-  toFirestore (model: Post) {
+  toFirestore (model: Post, options?: SetOptions) {
+    console.log(options)
+    if (options) {
+      return Object.assign(model, { updatedAt: serverTimestamp() })
+      // newDate() 보다는 진짜 서버의 시간을 알려주는 serverTimestamp를 사용하는 게 낫다
+    }
     return {
       title: model.title,
       content: model.content,
@@ -43,4 +55,17 @@ export const getPosts = () => {
   const q = query(ref)
 
   return getDocs(q)
+}
+
+export const updatedPost = (id: string, content:string) => {
+  const ref = doc(db, 'posts', id).withConverter(converter)
+  // return updateDoc(ref, { content, updatedAt: new Date() })
+  return setDoc(ref, { content }, { merge: true })
+  // 업데이트가 됐다 = merge 가 true가 됐다는 의미
+  // 원래 쓰던 updatedAt이랑 똑같이 작동하게 된다.
+}
+
+export const deletePost = (id: string) => {
+  const ref = doc(db, 'posts', id)// .withConverter(converter)
+  return deleteDoc(ref)
 }
