@@ -47,17 +47,17 @@
       "port": 5006
     },
     "firestore": {
-      "port": 8115
-      // 바꾸면 index.ts 가서 주소 수정
+      "port": 8117
+      // 바꾸면 firebase.ts 가서 주소 수정
     },
     "database": {
-      "port": 9016
+      "port": 9017
     },
     "hosting": {
       "port": 5005
     },
     "pubsub": {
-      "port": 8165
+      "port": 8168
     },
     "storage": {
       "port": 9201
