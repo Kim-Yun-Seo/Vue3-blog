@@ -28,10 +28,13 @@ const converter:FirestoreDataConverter<User> = {
 
   fromFirestore (snapshot): User {
     const data = snapshot.data()
+    let photoURL = data.photoURL as string
+    if (photoURL.includes('gravatar')) photoURL += '?d=monsterid'
+    console.log('aaa')
     return new User(
       data.email,
       data.displayName,
-      data.photoURL,
+      photoURL,
       data.createdAt instanceof Timestamp ? data.createdAt.toDate() : undefined
     )
   }
