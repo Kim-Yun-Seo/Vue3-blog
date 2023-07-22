@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { } from 'vue'
 // import { firebaseUser, isSigned } from 'src/composables/useAuth'
-import PostWrite from 'src/components/PostWrite.vue'
+import PostWrite from 'src/components/users/PostWrite.vue'
 
 </script>
 

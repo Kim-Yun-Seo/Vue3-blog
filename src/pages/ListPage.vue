@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { } from 'vue'
-import PostList from 'src/components/PostList.vue'
+import PostList from 'src/components/users/PostList.vue'
 
 </script>
 
