@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { QueryDocumentSnapshot } from 'firebase/firestore'
 import { computed } from 'vue'
-import { User } from 'src/models/user'
+import User from 'src/models/user'
 // import { defineProps } from 'vue'
 
 const props = defineProps<{

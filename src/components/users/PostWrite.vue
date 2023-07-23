@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { db } from 'boot/firebase'
-// import { doc, setDoc } from 'firebase/firestore'
+import { doc } from 'firebase/firestore'
 import { useQuasar } from 'quasar'
 import { useRouter } from 'vue-router'
+import { db } from 'src/boot/firebase'
+import { firebaseUser } from 'src/composables/useAuth'
 
 import { Post, setPost } from 'src/models/Post'
 // collection, addDoc
@@ -16,14 +17,9 @@ const existRule = (val:string) => (val && val.length > 0) || '무언가를 쓰�
 const router = useRouter()
 
 const onSubmit = async () => {
-  // await setDoc(doc(db, 'posts', title.value), {
-  //   title: title.value,
-  //   content: content.value,
-  //   // title 자체를 id로 만들기 때문에 데이터에 접근하기가 상당히 쉬워짐
-  //   createdAt: new Date(),
-  //   updatedAt: new Date()
-  // })
-  await setPost(new Post(title.value, content.value))
+  if (!firebaseUser.value) throw Error('user not signed')
+  const userRef = doc(db, 'users', firebaseUser.value?.uid)
+  await setPost(new Post(title.value, content.value, userRef))
   $q.notify({
     message: '보내기에 성공하였습니다.',
     color: 'purple',
@@ -64,8 +60,6 @@ const onReset = () => {
             lazy-rules
             :rules="[
               existRule
-              // val => val !== null && val !== '' || 'Please type your age',
-              // val => val > 0 && val < 100 || 'Please type a real age'
             ]"
           />
         </q-card-section>

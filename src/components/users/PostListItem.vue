@@ -7,7 +7,7 @@ import {
   QueryDocumentSnapshot
 } from 'firebase/firestore'
 
-import { Post, deletePost, updatedPost } from 'src/models/Post'
+import { Post } from 'src/models/Post'
 
 const emit = defineEmits<{(e: 'refresh'): void}>()
 
@@ -15,17 +15,18 @@ const props = defineProps<{
   item:QueryDocumentSnapshot<Post>
 }>()
 const post = computed(() => props.item.data())
+const user = computed(() => post.value.userSnapshot?.data())
 // computed는 읽기만 하는거지 양방향(?) 소통이 되는 애는 아니다.
 
 const content = ref(post.value.content)
 async function update () {
-  await updatedPost(props.item.id, content.value)
+  await post.value.updatedPost(props.item.id, content.value)
   emit('refresh')
   // 전달은 했지만 아직 부모가 듣진 않았음
 }
 
 async function remove () {
-  await deletePost(props.item.id)
+  await post.value.deletePost(props.item.id)
   emit('refresh')
   // 전달은 했지만 아직 부모가 듣진 않았음
 }
@@ -50,8 +51,13 @@ async function remove () {
       <q-item-label caption>
         {{ post.updatedAt }}
       </q-item-label>
+      <q-item-label caption>
+        {{ post.userRef.id}}
+      </q-item-label>
+      <q-item-label caption>
+        {{ user?.email}}
+      </q-item-label>
     </q-item-section>
-
     <q-item-section>
       <q-input v-model="content" />
       <!-- ref로 만든 값을 표현해야 양방향 수정?이 가능하기 떄문에 -->

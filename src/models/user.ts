@@ -7,7 +7,9 @@ import {
   Timestamp,
   collection,
   query,
-  getDocs
+  getDocs,
+  doc,
+  getDoc
 } from 'firebase/firestore'
 
 import { db } from 'boot/firebase'
@@ -45,4 +47,10 @@ const userCollection = collection(db, 'users').withConverter(converter)
 export const getUsers = () => {
   const q = query(userCollection)
   return getDocs(q)
+}
+
+export const getUser = (uid: string) => {
+  const userRef = doc(db, 'users', uid).withConverter(converter)
+  return getDoc(userRef)
+  // 이 DocumentReference 가 참조하는 문서를 읽습니다.
 }
