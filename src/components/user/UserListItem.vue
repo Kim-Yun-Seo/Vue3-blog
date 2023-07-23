@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { QueryDocumentSnapshot } from 'firebase/firestore'
 import { computed } from 'vue'
-import User from 'src/models/user'
+import { User } from 'src/models/user'
 // import { defineProps } from 'vue'
 
 const props = defineProps<{
@@ -15,7 +15,7 @@ const user = computed(() => props.item.data())
 <template>
   <q-item>
     <q-item-section avatar>
-      <q-img :src="user.photoURL"/>
+      <q-img :src="user.photoURL + '?d=robohash'"/>
     </q-item-section>
     <q-item-seciton>
       <q-item-label>
