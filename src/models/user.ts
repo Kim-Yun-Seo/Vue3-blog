@@ -32,7 +32,6 @@ const converter:FirestoreDataConverter<User> = {
     const data = snapshot.data()
     let photoURL = data.photoURL as string
     if (photoURL.includes('gravatar')) photoURL += '?d=monsterid'
-    console.log('aaa')
     return new User(
       data.email,
       data.displayName,
